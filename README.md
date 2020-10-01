@@ -1,2 +1,3 @@
-# bullybot
-Sapobully FSK text generator
+# BullyBot
+Ergordic Markov chain for Sapobully FSK lyrics generator
+
