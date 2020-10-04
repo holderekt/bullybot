@@ -37,7 +37,7 @@ class State:
         return self.value
 
     def neighbor_size(self):
-        return len(self.words)
+        return len(self.wordcount)
 
     def update_frequency(self):
         self.words = [w for w in self.wordcount]
@@ -91,9 +91,10 @@ class BarsChain(Chain):
     def __init__(self, bars):
         self.chain = {}
         self.LAST_STATE = "__FINAL__"
-        self.LAST_WEIGHT = 0.2
+        self.LAST_WEIGHT = 0.4
         self.DIRTY_STATE = "__DIRTY__"
-        self.DIRTY_WEIGHT = 0.2
+        self.DIRTY_WEIGHT = 0.5
+        self.starters = []
 
         super()._calculate_frequency(bars) 
         self.update_last()
@@ -101,6 +102,9 @@ class BarsChain(Chain):
 
     def update_last(self):
         for word in self.chain:
+            if self.neighbor_size(word) >= 1 and (not self.is_last(word)):
+                self.starters.append(word)
+
             if self.chain[word].is_last():
                 super().add_word(word, self.LAST_STATE, self.LAST_WEIGHT)
                 super().add_word(word, self.DIRTY_STATE, self.DIRTY_WEIGHT)
