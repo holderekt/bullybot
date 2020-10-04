@@ -17,6 +17,12 @@ def file_readlines(filename):
         lines = file.readlines()
     return lines
 
+def parsetitle(filename):
+    '''
+    Parse all titles
+    '''
+    return [re.findall(REGEX_LINE, line.upper()) for line in file_readlines(filename)]
+
 def parse(filename):
     '''
     Load and split all lines in specified file

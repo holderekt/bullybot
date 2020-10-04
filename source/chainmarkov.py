@@ -131,4 +131,24 @@ class DirtyChain(Chain):
                 super().add_word(word, self.LAST_STATE, self.LAST_WEIGHT)
 
     def last(self, value):
-        return value == self.LAST_STATE                
+        return value == self.LAST_STATE
+
+
+class ErgordicChain(Chain):
+    def __init__(self, bars):
+        self.chain = {}
+        self.RANDOM_STATE = "__RANDOM__"
+        self.RANDOM_WEIGHT = 1
+        super()._calculate_frequency(bars)
+        self.update_last()
+        super().update()
+
+    def update_last(self):
+        for word in self.chain:
+            super().add_word(word, self.RANDOM_STATE, self.RANDOM_WEIGHT)
+
+    def get_next(self, value):
+        var =  super().get_next(value) 
+        if var == self.RANDOM_STATE:
+            var = rand.choice(list(self.chain.keys()))
+        return var

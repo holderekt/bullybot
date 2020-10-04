@@ -3,9 +3,21 @@ import lyricparser
 import chainmarkov
 
 class Spitter:
-    def __init__(self, barchain, dirtychain):
+    def __init__(self, barchain, dirtychain, titlechain):
        self.barchain = barchain
        self.dirtychain = dirtychain
+       self.titlechain = titlechain
+       self.MIN_TITLE = 2
+       self.MAX_TITLE = 6
+    
+    def title(self):
+        lng = rand.randrange(self.MIN_TITLE, self.MAX_TITLE)
+        var = rand.choice(list(self.titlechain.chain.keys()))
+        bar = ""
+        for index in range(lng):
+           bar = bar + var + " "
+           var = self.titlechain.get_next(var)
+        return bar
 
     def spit(self):
         var = rand.choice(self.barchain.starters)
