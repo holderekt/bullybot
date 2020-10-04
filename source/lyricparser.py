@@ -4,7 +4,7 @@
 
 import re
 
-REGEX_LINE = '([\w]+)|\((.*?)\)'
+REGEX_LINE = '([\w]+|\?|\!|\(.*?\))'
 REGEX_DIRTY = '[\w]+'
 
 
@@ -17,18 +17,6 @@ def file_readlines(filename):
         lines = file.readlines()
     return lines
 
-def extract_line(line):
-    '''
-    Split bar and dirty lines
-    '''
-    if(line[-1][1] == ''):
-        bar = [first for first, _ in line]
-        dirty = []
-    else:
-        bar = [first for first, _ in line[:-1]]
-        dirty = re.findall(REGEX_DIRTY, line[-1][1])
-    return bar,  dirty
-
 def parse(filename):
     '''
     Load and split all lines in specified file
@@ -39,11 +27,10 @@ def parse(filename):
     dirtys = []
     for line in lines:
         line = re.findall(REGEX_LINE, line.lower())
-        line, dirty = extract_line(line)
-        bars.append(line)
-        if len(dirty) != 0:
-            dirtys.append(dirty)
+        if "(" in line[-1]:
+            bars.append(line[:-1])
+            dirtys.append(re.findall(REGEX_DIRTY, line[-1]))
+        else:
+            bars.append(line)
     return bars, dirtys
         
-
-
