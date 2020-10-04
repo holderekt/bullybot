@@ -110,3 +110,21 @@ class BarsChain(Chain):
 
     def dirty(self, value):
         return value == self.DIRTY_STATE
+
+
+class DirtyChain(Chain):
+    def __init__(self, dirty):
+        self.chain = {}
+        self.LAST_STATE = "__FINAL__"
+        self.LAST_WEIGHT = 0.2
+        super()._calculate_frequency(dirty)
+        self.update_last()
+        super().update()
+
+    def update_last(self):
+        for word in self.chain:
+            if self.chain[word].is_last():
+                super().add_word(word, self.LAST_STATE, self.LAST_WEIGHT)
+
+    def last(self, value):
+        return value == self.LAST_STATE                
