@@ -23,3 +23,6 @@ Stai dicendo palle fra la vuoi fare (racks pieno di bastoni )
 ### Usage
 Just run main.py and press enter to generate new lyrics
 
+### Acknowledgements
+Special thanks to Nicola Cassetta and Luca Lasaracina in the 
+process of conceiving and writing this bullshit
