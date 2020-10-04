@@ -20,6 +20,10 @@ class State:
             self.wordcount[word] = 1
         self.total = self.total + 1
 
+    def add_word(self, word, value):
+        self.wordcount[word] = value
+        self.total = self.total + value
+
     def get_count(self, word):
         return self.wordcount[word]
     
@@ -45,7 +49,7 @@ class State:
         return rand.choices(population=self.words, weights=self.distribution)[0]
         
 
-class Chain:
+class Chain(object):
     def __init__(self, bars):
         self.chain = {}
         self._calculate_frequency(bars)
@@ -66,6 +70,9 @@ class Chain:
     def is_last(self, value):
         return self.chain[value].is_last()
 
+    def add_word(self, word, value, weight):
+        self.chain[word].add_word(value, weight)
+
     def update(self):
         for element in self.chain:
             self.chain[element].update_frequency()
@@ -73,5 +80,33 @@ class Chain:
     def get_next(self, value):
         return self.chain[value].next_state()
 
+    def neighbor(self, word):
+        return self.chain[word].words, self.chain[word].distribution
+
     def neighbor_size(self, value):
         return self.chain[value].neighbor_size()
+
+
+class BarsChain(Chain):
+    def __init__(self, bars):
+        self.chain = {}
+        self.LAST_STATE = "__FINAL__"
+        self.LAST_WEIGHT = 0.2
+        self.DIRTY_STATE = "__DIRTY__"
+        self.DIRTY_WEIGHT = 0.2
+
+        super()._calculate_frequency(bars) 
+        self.update_last()
+        super().update()
+
+    def update_last(self):
+        for word in self.chain:
+            if self.chain[word].is_last():
+                super().add_word(word, self.LAST_STATE, self.LAST_WEIGHT)
+                super().add_word(word, self.DIRTY_STATE, self.DIRTY_WEIGHT)
+
+    def last(self, value):
+        return value == self.LAST_STATE
+
+    def dirty(self, value):
+        return value == self.DIRTY_STATE
