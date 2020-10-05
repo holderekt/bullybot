@@ -14,7 +14,8 @@ Nipote che non ti sporgi ? (ti spegne per sempre )
 Sarò una nera ma quanto cazzo nei miei sogni (dopo )
 Big ass twerka sulla testa (pull up brr brr pow pow pow pow pow spow )
 Valgono 10000 ho messo e la top weed mi fa stare up 
-Tua tipa conta i pacchi e non fottiamo col giro come al cimitero no snitch nel giubbotto armani taxi b simon fanno la mia gang addosso per fare questa vita che vuole morire pieno di fuoco
+Tua tipa conta i pacchi e non fottiamo col giro come al cimitero no snitch nel giubbotto armani   
+taxi b simon fanno la mia gang addosso per fare questa vita che vuole morire pieno di fuoco
 Cento grammi stiamo fumando cali (white white white white white white )
 Big ass chain fanno splash come potrei ? (bastoni )
 Puzzi di versace reaction 
